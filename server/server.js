@@ -4,6 +4,9 @@ import path from 'path';
 const PORT = 3000;
 const __dirname = import.meta.dirname;
 import apiRouter from './routes/api.js';
+// import cookieController from './controllers/cookieController.js';
+import userController from './controllers/userController.js';
+// import sessionController from './controllers/sessionController.js';
 
 /**
  * handle parsing request body
@@ -12,12 +15,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // statically serve everything in the build folder on the route '/build'
-app.use('/build', express.static(path.join(__dirname, '../build')));
+// app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // serve index.html on home page
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });  
+
+// signup
+app.post('/signup', userController.createUser, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
+
+/*
+* login
+*/
+// app.post('/login', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
+//   // what should happen here on successful log in?
+//   // res.status(200).redirect('/secret');
+//   res.status(200).json({a: 1});
+// });
+
 
 //define route handlers
 app.use('/api/', apiRouter);
