@@ -3,8 +3,13 @@ const app = express();
 import path from 'path';
 const PORT = 3000;
 const __dirname = import.meta.dirname;
-import supabase from '../server/models/armadilloModel.js';
 import apiRouter from './routes/api.js';
+
+/**
+ * handle parsing request body
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //define route handlers
 app.use('/', apiRouter);

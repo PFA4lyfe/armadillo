@@ -1,10 +1,8 @@
-import express from 'express';
 import { Router } from 'express';
 import supabase from '../models/armadilloModel.js';
 const router = Router();
-console.log('hello there');
+
 router.get('/', async (req, res) => {
-  console.log('hello');
   try {
     const { data, error } = await supabase.from('kids').select();
 
