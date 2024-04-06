@@ -3,6 +3,8 @@ const initialState = {
     departureCity: '',
     destinationCity: '', 
     depatureDate: '',
+    returnDate: '',
+    numTravelers: 0,
 }
 
 export const flightSlice = createSlice({
@@ -18,9 +20,15 @@ export const flightSlice = createSlice({
         setDepartureDate(state, action) {
             state.depatureDate = action.payload; 
         },
+        setReturnDate(state, action) {
+            state.returnDate = action.payload;
+        }
+        setNumTravelers(state, action) {
+            state.numTravelers = action.payload;
+        }
     }
 });
 
-export const { setDepartureCity, setDestinationCity, setDepartureDate } = flightSlice.actions;
+export const { setDepartureCity, setDestinationCity, setDepartureDate, setReturnDate, setNumTravelers } = flightSlice.actions;
 
 export default flightSlice.reducer;
