@@ -1,11 +1,11 @@
-import FlightTest from './Test'; // Adjust the path as necessary
+import Flights from './components/Flights.jsx'
 
 function App() {
   return (
-    <div className="App">
-      <FlightTest />
+    <div>
+      <Flights />
     </div>
-  );
+  )
 }
 
 export default App;
