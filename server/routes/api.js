@@ -1,27 +1,22 @@
 import { Router } from 'express';
-import supabase from '../models/armadilloModel.js';
+import apiController from '../controllers/apiController.js';
 const router = Router();
 
-router.get('/', async (req, res) => {
-  try {
-    const { data, error } = await supabase.from('kids').select();
-
-    if (supabase) {
-      console.log(data);
-    }
-    if (error) {
-      console.log(error);
-    }
-    supabase
-      .from('persons')
-      .select()
-      .then((resp) => console.log(resp));
-
-    res.status(200).json(data);
-  } catch (error) {
-    console.log('failed');
-    res.status(404).json(error);
-  }
+router.get('/:id', apiController.getUser, (req, res) => {
+  res.status(200).json(res.locals.user);
 });
+
+router.get('/flights/:id', apiController.getUserFlights, (req, res) => {
+  res.status(200).json(res.locals.flights);
+});
+
+router.post('/flights/', apiController.addUserFlight, (req, res) => {
+  res.status(200).json(res.locals.flight);
+});
+
+router.delete('/flights/:id', apiController.deleteUserFlight, (req, res) => {
+  res.status(200).json({a: 1});
+});
+
 
 export default router;

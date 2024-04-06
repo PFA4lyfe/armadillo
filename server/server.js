@@ -11,8 +11,16 @@ import apiRouter from './routes/api.js';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// statically serve everything in the build folder on the route '/build'
+app.use('/build', express.static(path.join(__dirname, '../build')));
+
+// serve index.html on home page
+app.get('/', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});  
+
 //define route handlers
-app.use('/', apiRouter);
+app.use('/api/', apiRouter);
 
 // handle requests for static files
 app.use(express.static(path.resolve(__dirname, '../src')));
