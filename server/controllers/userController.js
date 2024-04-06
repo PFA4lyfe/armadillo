@@ -46,44 +46,49 @@ userController.createUser = async (req, res, next) => {
 * the appropriate user in the database, and then authenticate the submitted password
 * against the password stored in the database.
 */
-// userController.verifyUser = async (req, res, next) => {
+userController.verifyUser = async (req, res, next) => {
 
-//   // helper function to compare input pw with salted + hashed pw
-//   const comparePasswords = (plainTextPassword, hashedPasswordFromDatabase) => {
-//     return bcrypt.compare(plainTextPassword, hashedPasswordFromDatabase)
-//       .then ((match) => {
-//         if (match) return true;
-//         else {
-//           console.log('incorrect pw')
-//           return false;
-//         }
-//       })
-//       .catch (err => {
-//         console.log('error in compare');
-//         return false;
-//       });
-//   }
+  // helper function to compare input pw with salted + hashed pw
+  const comparePasswords = (plainTextPassword, hashedPasswordFromDatabase) => {
+    return bcrypt.compare(plainTextPassword, hashedPasswordFromDatabase)
+      .then ((match) => {
+        if (match) return true;
+        else {
+          console.log('incorrect pw')
+          return false;
+        }
+      })
+      .catch (err => {
+        console.log('error in compare');
+        return false;
+      });
+  }
 
-//   // write code here
-//   try {
-//     const response = await User.find({username: req.body.username});
-//     const pwMatch = await comparePasswords(req.body.password, response[0].password);
+  // grab request body for inputted username and pw
+  const {username, password} = req.body;
 
-//     if (response.length === 0 || !(pwMatch)) {
-//       res.locals.goToSign = true;
-//       return next({
-//         log: 'user does not exist or incorrect pw',
-//         message: {err: 'need to sign up'}
-//       })
-//     }
-    
-//     return next();
-//   } catch (err) {
-//     return next({
-//       log: 'problem in verifyUser',
-//       message: {err: 'cannot verify user'}
-//     })
-//   }
-// };
+  // grab user for comparison
+  const {data, error} = await supabase
+    .from('users')
+    .select()
+    .eq('username', username);
+  
+  if (error || data.length === 0) {
+    return next({
+      log: 'problem in getting user for verification',
+      message: {err: 'cannot get user for verification'}
+    })
+  } 
+
+  const pwMatch = await comparePasswords(password, data[0].password);
+
+  if (!pwMatch) {
+    return next({
+      log: 'pw does not match',
+      message: {err: 'incorrect pw'}
+    })
+  }
+  return next();
+};
 
 export default userController;

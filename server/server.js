@@ -30,11 +30,11 @@ app.post('/signup', userController.createUser, (req, res) => {
 /*
 * login
 */
-// app.post('/login', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
-//   // what should happen here on successful log in?
-//   // res.status(200).redirect('/secret');
-//   res.status(200).json({a: 1});
-// });
+app.post('/login', userController.verifyUser, (req, res) => {
+  // what should happen here on successful log in?
+  // res.status(200).redirect('/secret');
+  res.status(200).json({a: 1});
+});
 
 
 //define route handlers
