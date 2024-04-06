@@ -1,48 +1,34 @@
-// const cookieController = {};
-// const User = require('../models/userModel');
+import supabase from "../models/armadilloModel.js";
 
-// /**
-// * setCookie - set a cookie with a random number
-// */
-// cookieController.setCookie = (req, res, next) => {
-//   // write code here
-//   res.cookie('codesmith', 'hi', {
-//     secure: true,
-//     maxAge: 3600000,
-//     httpOnly: true
-//   });
+const cookieController = {};
 
-//   res.cookie('secret', Math.floor(Math.random() * 100), {
-//     maxAge: 3600000,
-//     secure: true,
-//     httpOnly: true
-//   });
-//   return next();
-// }
+/**
+* setSSIDCookie - store the user id in a cookie
+*/
+cookieController.setSSIDCookie = async (req, res, next) => {
+  // write code here
 
-// /**
-// * setSSIDCookie - store the user id in a cookie
-// */
-// cookieController.setSSIDCookie = async (req, res, next) => {
-//   // write code here
-//   try {
-//     const response = await User.find({username: req.body.username});
-//     res.locals.id = response[0]._id.toString();
+  const {data, error} = await supabase
+    .from('users')
+    .select()
+    .eq('username', req.body.username);
 
-//     res.cookie('ssid', res.locals.id, {
-//       maxAge: 3600000,
-//       secure: true,
-//       httpOnly: true
-//     });
+  if (error) {
+    return next({
+        log: 'problem in setSSIDCookie',
+        message: {err: 'cannot create SSID cookie'}
+    })
+  }
 
-//     return next();
-//   }
-//   catch (err) {
-//     return next({
-//       log: 'problem in setSSIDCookie',
-//       message: {err: 'cannot set SSID cookie'}
-//     })
-//   }
-// }
+  res.locals.id = await data[0].id.toString();
 
-// export default cookieController;
+  res.cookie('ssid', res.locals.id, {
+    maxAge: 3600000,
+    secure: true,
+    httpOnly: true,
+  });
+
+  return next();
+}
+
+export default cookieController;

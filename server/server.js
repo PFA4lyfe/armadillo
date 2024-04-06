@@ -4,7 +4,7 @@ import path from 'path';
 const PORT = 3000;
 const __dirname = import.meta.dirname;
 import apiRouter from './routes/api.js';
-// import cookieController from './controllers/cookieController.js';
+import cookieController from './controllers/cookieController.js';
 import userController from './controllers/userController.js';
 // import sessionController from './controllers/sessionController.js';
 
@@ -30,10 +30,9 @@ app.post('/signup', userController.createUser, (req, res) => {
 /*
 * login
 */
-app.post('/login', userController.verifyUser, (req, res) => {
-  // what should happen here on successful log in?
+app.post('/login', userController.verifyUser, cookieController.setSSIDCookie, (req, res) => {
   // res.status(200).redirect('/secret');
-  res.status(200).json({a: 1});
+  res.status(200).json({login: 'success'});
 });
 
 
