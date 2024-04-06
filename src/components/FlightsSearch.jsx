@@ -1,12 +1,42 @@
 import { useSelector, useDispatch } from "react-redux";
-import { setDepartureCity, setDestinationCity, setDepartureDate } from "../slices/flightSlice";
+import { setDepartureCity, setDestinationCity, setDepartureDate, setReturnDate, setNumTravelers } from "../slices/flightSlice";
 
 function Flights() {
     const dispatch = useDispatch(); 
     const { departureCity, destinationCity, departureDate, returnDate, numTravelers } = useSelector(state => state.flight); 
 
-    function handleClick () {
-        
+    const handleClick = async () => {
+      let queryText = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
+
+      // add in query parameters (max 5)
+      queryText += `?originLocationCode=${departureCity}`;
+      queryText += `&destinationLocationCode=${destinationCity}`;
+      queryText += `&departureDate=${departureDate}`;
+      queryText += `&returnDate=${returnDate}`;
+      queryText += `&adults=${numTravelers}`;
+      queryText += '&max=5';
+
+    //   const url = queryText;
+    //   const accessToken = '70ChYff1uIx2XSCiPxe854R5hk9D';
+    //   const options = {
+    //     method: 'GET',
+    //     headers: {
+    //         'content-type': 'application/json',
+    //         Authorization: `Bearer ${accessToken}`
+    //     },
+    //   };
+
+    //   try {
+    //     const response = await fetch(url, options);
+    //     const data = await response.json();
+    //     console.log(data);
+
+    //     // HEATHER: CREATE NEW ARRAY HERE TO SEND OUT TO DISPATCH, CHRIS MADE A STATE CALLED search
+    //     // dispatch
+    //    } catch (err) {
+    //     console.log(err);
+    //    }
+
     }
 
     return (
@@ -27,10 +57,10 @@ function Flights() {
             />
             <input 
                 type="text" 
-                id="destination-city"
-                value={destinationCity} 
+                id="num-travelers"
+                value={numTravelers} 
                 onChange={(e) => dispatch(setNumTravelers(e.target.value))}
-                placeholder="Destination City"
+                placeholder="Number of travelers"
             />
             <input 
                 type="date" 
@@ -44,7 +74,7 @@ function Flights() {
                 type="date" 
                 id="return-date"
                 min={new Date(Date.now()).toISOString().split('T')[0]}
-                value={departureDate} 
+                value={returnDate} 
                 onChange={(e) => dispatch(setReturnDate(e.target.value))}
                 placeholder="Return Date"
             />
@@ -57,31 +87,6 @@ function Flights() {
 
 export default Flights; 
 
-// const url =
-// 'https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LAX&destinationLocationCode=JFK&departureDate=2024-05-15&returnDate=2024-05-25&adults=2&max=5';
-// const accessToken = 'llQ0jqeZzqOr7c1kpNLBX9DzPWM8';
-// const options = {
-//  method: 'GET',
-//  headers: {
-//    'content-type': 'application/json',
-//    Authorization: `Bearer ${accessToken}`
-//  },
-// };
-
-// try {
-//  const response = await fetch(url, options);
-//  const data = await response.json();
-
-// once we get data, it is large, SO make a new array that has the details we actually hneed and update our search state
-
-//  console.log(data);
-//  res.status(200).json(data);
-//  return;
-// } catch (err) {
-//  console.log(err);
-//  res.status(400).json({a: 1});
-// }
-
 
 
 // we get that large data obj, and there's 5 results
@@ -91,15 +96,17 @@ export default Flights;
 // each element is an object with 5ish pproperty (what we actually need)
 
 // for each element in our large array...
-apiObject.forEach(el => {
-result.push({
-    dep: el.something.something.flights.dep
-    arr:
-    time:
-    price:
-    airline:
-})
-})
+// apiObject.forEach(el => {
+// result.push({
+//     dep: el.something.something.flights.dep
+//     arr:
+//     time:
+//     price:
+//     airline:
+// })
+// })
 
 // once we have result that is a smaller version of our returned object
 // send that to our slice to update our search state
+
+//dep_city, dest_city, dep_date, ret_date, price, airline, num_travelers
