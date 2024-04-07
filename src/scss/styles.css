@@ -1,38 +1,80 @@
-header {
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    justify-content: space-between;
+:root {
+  --primary-text: rgb(25, 25, 25);
+  --secondary-text: rgb(46, 46, 46);
+  --button-color: rgb(81, 123, 133);
 }
-.rightNav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.rightSection {
-    display: flex;
-}
-header img {
-    height: 4em;
-    width: auto;
-}
-header ul{ 
-    list-style-type: none;
-    display: flex;
-    gap: 15px;
-    margin: 0;
-    padding: 0; 
+* {
+  font-family: sans-serif;
+  text-decoration: none;
 }
 
-.flights-component {
-    display: flex;
-    justify-content: center;
+/* header */
+header {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  justify-content: space-between;
+  color: var(--secondary-text);
+}
+
+.leftNav li a {
+  color: var(--secondary-text);
+}
+
+.rightNav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.rightSection {
+  display: flex;
+}
+header img {
+  height: 4em;
+  width: auto;
+}
+header ul {
+  list-style-type: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+/* Flights component */
+.flights-search-component {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.flight-list-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .flight-list {
-    display: flex;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
-.splash{
-    width: 100%; 
-    height: auto; 
+.flight-list > * {
+  border: 1px solid black;
+  padding: 10px;
+}
+.flight-list button {
+  margin-left: 45px;
+}
+
+/* Image */
+.splash {
+  width: 100%;
+  height: auto;
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-color);
+  border: none;
+  color: white;
+  border-radius: 2px;
+  width: 100px;
 }

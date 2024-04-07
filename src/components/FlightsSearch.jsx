@@ -1,21 +1,29 @@
-import { useSelector, useDispatch } from "react-redux";
-import { setDepartureCity, setDestinationCity, setDepartureDate, setReturnDate, setNumTravelers } from "../slices/flightSlice";
-import '/src/scss/styles.css'
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setDepartureCity,
+  setDestinationCity,
+  setDepartureDate,
+  setReturnDate,
+  setNumTravelers,
+} from '../slices/flightSlice';
+import '/src/scss/styles.css';
 
 function Flights() {
-    const dispatch = useDispatch(); 
-    const { departureCity, destinationCity, departureDate, returnDate, numTravelers } = useSelector(state => state.flight); 
+  const dispatch = useDispatch();
+  const { departureCity, destinationCity, departureDate, returnDate, numTravelers } = useSelector(
+    (state) => state.flight
+  );
 
-    const handleClick = async () => {
-      let queryText = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
+  const handleClick = async () => {
+    let queryText = 'https://test.api.amadeus.com/v2/shopping/flight-offers';
 
-      // add in query parameters (max 5)
-      queryText += `?originLocationCode=${departureCity}`;
-      queryText += `&destinationLocationCode=${destinationCity}`;
-      queryText += `&departureDate=${departureDate}`;
-      queryText += `&returnDate=${returnDate}`;
-      queryText += `&adults=${numTravelers}`;
-      queryText += '&max=5';
+    // add in query parameters (max 5)
+    queryText += `?originLocationCode=${departureCity}`;
+    queryText += `&destinationLocationCode=${destinationCity}`;
+    queryText += `&departureDate=${departureDate}`;
+    queryText += `&returnDate=${returnDate}`;
+    queryText += `&adults=${numTravelers}`;
+    queryText += '&max=5';
 
     //   const url = queryText;
     //   const accessToken = '70ChYff1uIx2XSCiPxe854R5hk9D';
@@ -37,58 +45,54 @@ function Flights() {
     //    } catch (err) {
     //     console.log(err);
     //    }
+  };
 
-    }
+  return (
+    <div className='flights-search-component'>
+      <input
+        type='text'
+        id='departure-city'
+        value={departureCity}
+        onChange={(e) => dispatch(setDepartureCity(e.target.value))}
+        placeholder='Departure City'
+      />
+      <input
+        type='text'
+        id='destination-city'
+        value={destinationCity}
+        onChange={(e) => dispatch(setDestinationCity(e.target.value))}
+        placeholder='Destination City'
+      />
+      <input
+        type='text'
+        id='num-travelers'
+        value={numTravelers}
+        onChange={(e) => dispatch(setNumTravelers(e.target.value))}
+        placeholder='Destination City'
+      />
+      <input
+        type='date'
+        id='departure-date'
+        min={new Date(Date.now()).toISOString().split('T')[0]}
+        value={departureDate}
+        onChange={(e) => dispatch(setDepartureDate(e.target.value))}
+        placeholder='Departure Date'
+      />
+      <input
+        type='date'
+        id='return-date'
+        min={new Date(Date.now()).toISOString().split('T')[0]}
+        value={returnDate}
+        onChange={(e) => dispatch(setReturnDate(e.target.value))}
+        placeholder='Return Date'
+      />
 
-    return (
-        <div className="flights-component">
-             <input 
-                type="text" 
-                id="departure-city"
-                value={departureCity} 
-                onChange={(e) => dispatch(setDepartureCity(e.target.value))}
-                placeholder="Departure City"
-            />
-            <input 
-                type="text" 
-                id="destination-city"
-                value={destinationCity} 
-                onChange={(e) => dispatch(setDestinationCity(e.target.value))}
-                placeholder="Destination City"
-            />
-            {/* <input 
-                type="text" 
-                id="num-travelers"
-                value={numTravelers} 
-                onChange={(e) => dispatch(setNumTravelers(e.target.value))}
-                placeholder="Destination City"
-            />
-            <input 
-                type="date" 
-                id="depature-date"
-                min={new Date(Date.now()).toISOString().split('T')[0]}
-                value={departureDate} 
-                onChange={(e) => dispatch(setDepartureDate(e.target.value))}
-                placeholder="Departure Date"
-            />
-            <input 
-                type="date" 
-                id="return-date"
-                min={new Date(Date.now()).toISOString().split('T')[0]}
-                value={returnDate} 
-                onChange={(e) => dispatch(setReturnDate(e.target.value))}
-                placeholder="Return Date"
-            />
-            
-            
-            <button onClick={handleClick}>Submit</button>
-        </div>
-    )
+      <button onClick={handleClick}>Search</button>
+    </div>
+  );
 }
 
-export default Flights; 
-
-
+export default Flights;
 
 // we get that large data obj, and there's 5 results
 
