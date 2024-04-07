@@ -1,6 +1,8 @@
 import Home from './pages/Home.jsx';
 import Trips from './pages/Trips.jsx'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import './scss/styles.css'; 
+import logo from './assets/images/logo.png'
 
 function App() {
   return (
@@ -9,14 +11,20 @@ function App() {
       <Trips /> */}
       <BrowserRouter>
         <header>
-          <div id='header--left'>
-            <Link id='link' to='/'>Home</Link>
+          <ul className='leftNav'>
+            <li><Link id='link' to='/'>Home</Link></li>
+            <li><Link id='link' to='/trips'>Trips</Link></li>
+          </ul>
+          <div className='rightSection'>
+          <ul className='rightNav'>
+            <li>Profile</li>
+            <li>About</li>
+            <li>Contact Us</li>
+          </ul>
+          <img src={logo}/>
           </div>
-          <div id='header--right'>
-            <Link id='link' to='/trips'>Trips</Link>
-          </div>
+          
         </header>
-
         <Routes>
           <Route index element={<Home />} />
           <Route path='/home' element={<Home />}/>

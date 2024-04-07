@@ -23,9 +23,9 @@ export const flightSlice = createSlice({
         setReturnDate(state, action) {
             state.returnDate = action.payload;
         }
-        setNumTravelers(state, action) {
-            state.numTravelers = action.payload;
-        }
+        // setNumTravelers(state, action) {
+        //     state.numTravelers = action.payload;
+        // }
     }
 });
 

@@ -1,11 +1,38 @@
+header {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: space-between;
+}
+.rightNav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.rightSection {
+    display: flex;
+}
+header img {
+    height: 4em;
+    width: auto;
+}
+header ul{ 
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0; 
+}
 
-
-
-#trip-container {
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 10px;
-    box-shadow: 10px 15px 39px rgba(0, 0, 0, .2);
-    border-radius: 5px;
-    background-color: blue;
+.flights-component {
+    display: flex;
+    justify-content: center;
+}
+.flight-list {
+    display: flex;
+    justify-content: center;
+}
+.splash{
+    width: 100%; 
+    height: auto; 
 }

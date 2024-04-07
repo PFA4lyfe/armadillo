@@ -1,4 +1,6 @@
 import Flight from './Flight.jsx';
+import '/src/scss/styles.css'
+
 
 function FlightList({ flightArr }) {
 
@@ -9,7 +11,7 @@ function FlightList({ flightArr }) {
     });
 
     return (
-        <div>
+        <div className="flight-list">
             <h1>flight list component</h1>
             {Flights}
         </div>

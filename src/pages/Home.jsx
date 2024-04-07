@@ -1,11 +1,14 @@
 import Flights from '../components/FlightsSearch.jsx';
 import FlightList from '../components/FlightList.jsx';
+import '/src/scss/styles.css'
+import splash from '/src/assets/images/splash-image.jpg'
 
-const Home = props => {
+
+const Home = () => {
 
     return (
         <div>
-            <h1>Home Page</h1>
+            <img className="splash" src={splash}/>
             <Flights />
             <FlightList flightArr={[]}/>
         </div>

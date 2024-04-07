@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setDepartureCity, setDestinationCity, setDepartureDate } from "../slices/flightSlice";
+import '/src/scss/styles.css'
 
 function Flights() {
     const dispatch = useDispatch(); 
@@ -10,7 +11,7 @@ function Flights() {
     }
 
     return (
-        <div>
+        <div className="flights-component">
              <input 
                 type="text" 
                 id="departure-city"
@@ -25,13 +26,13 @@ function Flights() {
                 onChange={(e) => dispatch(setDestinationCity(e.target.value))}
                 placeholder="Destination City"
             />
-            <input 
+            {/* <input 
                 type="text" 
                 id="destination-city"
                 value={destinationCity} 
                 onChange={(e) => dispatch(setNumTravelers(e.target.value))}
                 placeholder="Destination City"
-            />
+            /> */}
             <input 
                 type="date" 
                 id="depature-date"
@@ -91,15 +92,15 @@ export default Flights;
 // each element is an object with 5ish pproperty (what we actually need)
 
 // for each element in our large array...
-apiObject.forEach(el => {
-result.push({
-    dep: el.something.something.flights.dep
-    arr:
-    time:
-    price:
-    airline:
-})
-})
+// apiObject.forEach(el => {
+// result.push({
+//     dep: el.something.something.flights.dep
+//     arr:
+//     time:
+//     price:
+//     airline:
+// })
+// })
 
 // once we have result that is a smaller version of our returned object
 // send that to our slice to update our search state
