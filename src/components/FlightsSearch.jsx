@@ -85,12 +85,13 @@ function arrayofTravelObjects(obj, dep_city, dep_date, dest_city, ret_date, num_
       const price = flightOffer.price.total * num_travelers;
       flightOffer.itineraries.forEach(itinerary => {  //itinerary is "itineraries"
         itinerary.segments.forEach(segment => { //iterates through "segments" (same name)
+            console.log(obj)
           const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
           const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
-          const airlines = airlinesObj[segment.carrierCode]
+          const airline = airlinesObj[segment.carrierCode]
        
           if (segment.departure.iataCode === dep_city && departureDate === dep_date && segment.arrival.iataCode === dest_city && arrivalDate === ret_date) {
-            result.push({ dep_city, dep_date, dest_city, ret_date, price, airlines, num_travelers });
+            result.push({ dep_city, dep_date, dest_city, ret_date, price, airline, num_travelers });
           }
         });
       });
