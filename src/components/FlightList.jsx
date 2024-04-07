@@ -7,7 +7,7 @@ function FlightList({ flightArr }) {
     console.log(flightArr);
 
     const Flights = flightArr.map((el, idx) => {
-        return (<Flight key={idx} dep={el.dep} arr={el.arr} price={el.price} time={el.time} airline={el.airline}/>)
+        return (<Flight key={idx} dep_city={el.dep_city} dest_city={el.dest_city} dep_date={el.dep_date} ret_date={el.ret_date} price={el.price} airline={el.airline} num_travelers={el.num_travelers} isFav/>)
     });
 
     return (
