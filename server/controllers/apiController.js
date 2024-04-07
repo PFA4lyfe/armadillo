@@ -42,9 +42,10 @@ apiController.getUserFlights = async (req, res, next) => {
 }
 
 apiController.addUserFlight = async (req, res, next) => {
+
   const body = req.body;
   const {destination, dep_date, arr_date, price, airline, num_travelers, user_id} = body;
-  
+
   const { data, error } = await supabase
   .from('user_flights')
   .insert({

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon ./server/server.js",
-    "dev": "vite",
+    "dev": "nodemon ./server/server.js & vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

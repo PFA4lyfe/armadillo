@@ -16,6 +16,7 @@ function Flight({dep_city, dest_city, dep_date, ret_date, price, airline, num_tr
         num_travelers: num_travelers,
         user_id: id,
       };
+      console.log(data);
       const url = '/api/flights'
       fetch(url, {
         method: 'POST',

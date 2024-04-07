@@ -8,15 +8,32 @@ const initialState = {
     returnDate: '2024-05-07',
     numTravelers: 1,
     searchArr: [{
-        departure: 'LAX',
-        destination: 'JFK',
+        dep_city: 'LAX',
+        dest_city: 'JFK',
         dep_date: '2024-05-04',
-        arr_date: '2024-05-08',
+        ret_date: '2024-05-08',
         price: 1200,
         airline: 'Jet Blue',
         num_travelers: 2,
     }],
-    favorites: [],
+    favorites: [{
+        dep_city: 'LAX',
+        dest_city: 'JFK',
+        dep_date: '2024-05-04',
+        ret_date: '2024-05-08',
+        price: 1200,
+        airline: 'Jet Blue',
+        num_travelers: 2,
+    },
+    {
+        dep_city: 'LAX',
+        dest_city: 'JFK',
+        dep_date: '2024-05-04',
+        ret_date: '2024-05-08',
+        price: 1200,
+        airline: 'Jet Blue',
+        num_travelers: 2,
+    }],
 }
 
 export const flightSlice = createSlice({
