@@ -116,7 +116,7 @@ function Flights() {
     queryText += '&max=5';
 
       const url = queryText;
-      const accessToken = '70ChYff1uIx2XSCiPxe854R5hk9D';
+      const accessToken = 'XyDluAJkdvUZbpdjUMO2SraMsvVr';
       const options = {
         method: 'GET',
         headers: {
