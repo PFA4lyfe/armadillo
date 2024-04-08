@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFavorite } from '../slices/flightSlice';
+import { removeFavorite, addFavorite } from '../slices/flightSlice';
 
 function Flight({
   dep_city,
@@ -14,6 +14,7 @@ function Flight({
 }) {
   const { id } = useSelector((state) => state.flight);
   const dispatch = useDispatch();
+
   const handleClick = () => {
     const data = {
       dep_city,
@@ -25,7 +26,7 @@ function Flight({
       num_travelers,
       user_id: id,
     };
-    console.log(data);
+
     const url = '/api/flights';
     fetch(url, {
       method: 'POST',
@@ -35,6 +36,7 @@ function Flight({
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
+      .then((data) => dispatch(addFavorite(data)))
       .catch((error) => console.error('Error:', error));
   };
 

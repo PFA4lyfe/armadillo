@@ -42,7 +42,10 @@ app.post('/signup', userController.createUser, (req, res) => {
 * login
 */
 app.post('/api/login', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
-  res.status(200).json({success: true});
+  res.status(200).json({
+    success: true,
+    ...res.locals.user[0],
+  });
 });
 
 // verify logged in
@@ -50,6 +53,10 @@ app.get('/api/isLoggedIn/', sessionController.isLoggedIn, (req, res) => {
   res.status(200).json({success: res.locals.isLoggedIn});
 });
 
+// log out
+app.get('/api/logout', userController.logoutUser, (req, res) => {
+  res.status(200).json({a: 1});
+})
 
 //define route handlers
 app.use('/api/', apiRouter);

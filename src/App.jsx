@@ -5,8 +5,27 @@ import Login from './pages/Login.jsx';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './scss/styles.css'; 
 import logo from './assets/images/logo.png'
+import { useDispatch } from 'react-redux';
+import { setUsername, setPassword, setId, setFavorite, setIsLoggedIn } from './slices/flightSlice.js';
 
 function App() {
+
+  const dispatch = useDispatch();
+  
+  const handleLogoutClick = async () => {
+    dispatch(setUsername(''));
+    dispatch(setPassword(''));
+    dispatch(setId(0));
+    dispatch(setFavorite([]));
+    dispatch(setIsLoggedIn(false));
+
+    const response = await fetch('/api/logout');
+
+    const data = await response.json();
+
+    return;
+  }
+
   return (
     <div>
       <BrowserRouter>
@@ -20,6 +39,7 @@ function App() {
             <li>Profile</li>
             <li>About</li>
             <li>Contact Us</li>
+            <li><button onClick={handleLogoutClick}>log out</button></li>
           </ul>
           <img src={logo}/>
           </div>

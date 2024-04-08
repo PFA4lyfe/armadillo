@@ -22,7 +22,7 @@ apiController.getUser = async (req, res, next) => {
 }
 
 apiController.getUserFlights = async (req, res, next) => {
-    const id = req.params.id;
+    const id = req.cookies.ssid;
   
     const { data, error } = await supabase
     .from('user_flights')
@@ -43,15 +43,18 @@ apiController.getUserFlights = async (req, res, next) => {
 
 apiController.addUserFlight = async (req, res, next) => {
 
-  const body = req.body;
-  const {destination, dep_date, arr_date, price, airline, num_travelers, user_id} = body;
+  console.log('adding to favorites...')
+  // grab properties from request body
+  const {dest_city, dep_city, dep_date, ret_date, price, airline, num_travelers, user_id} = req.body;
 
+  // insert into favorites DB for that user
   const { data, error } = await supabase
   .from('user_flights')
   .insert({
-    destination,
+    dest_city,
+    dep_city,
     dep_date,
-    arr_date,
+    ret_date,
     price,
     airline,
     num_travelers,
@@ -60,13 +63,14 @@ apiController.addUserFlight = async (req, res, next) => {
   .select();
   
   if (error) {
+    console.log(error);
     return next({
       log: 'problem in addUserFlight controller',
       message: {err: error}
     })
   }
   
-  res.locals.flight = data;
+  res.locals.flight = data[0];
   
   return next();
 }

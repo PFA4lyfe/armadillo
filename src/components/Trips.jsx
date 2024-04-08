@@ -5,6 +5,7 @@ import { setDepartureCity, setDestinationCity, setDepartureDate } from '../slice
 
 function Trips() {
   const favorites = useSelector((state) => state.flight);
+  console.log(favorites);
   return (
     <div>
       <section>

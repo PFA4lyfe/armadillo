@@ -2,12 +2,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import FlightList from '../components/FlightList.jsx';
 import { useEffect } from 'react';
-import { setFavorite } from '../slices/flightSlice.js';
 import { Navigate } from 'react-router-dom';
-import { setIsLoggedIn } from '../slices/flightSlice.js';
+import { setIsLoggedIn, setFavorite } from '../slices/flightSlice.js';
 
 const Trips = (props) => {
-  const { favorites, isLoggedIn, id } = useSelector((state) => state.flight);
+  const { favorites, isLoggedIn} = useSelector((state) => state.flight);
 
   const dispatch = useDispatch();
 
@@ -33,17 +32,18 @@ const Trips = (props) => {
     isLoggedIn();
   });
 
-  // if first time rendering, get flights from use
+  // if first time rendering, get user's favorite flights (done already in home page, but just in case they go straight to this page)
   useEffect(() => {
+    // using ssid cookie to grab id data for which user to grab favorites
     async function fetchData() {
-        const response = await fetch(`/api/flights/${id}`, {
+        const response = await fetch(`/api/flights/`, {
             method: 'GET'
         });
         const data = await response.json();
-        console.log(data);
+    
         dispatch(setFavorite(data));
     }
-
+    
     if (favorites.length === 0) fetchData();
   });
 

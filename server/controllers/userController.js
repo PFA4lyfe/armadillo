@@ -88,7 +88,30 @@ userController.verifyUser = async (req, res, next) => {
       message: {err: 'incorrect pw'}
     })
   }
+
+  res.locals.user = data;
+
   return next();
 };
+
+userController.logoutUser = async (req, res, next) => {
+
+  // delete all session rows (since we logged out)
+  const {data, error} = await supabase
+    .from('sessions')
+    .delete()
+    .neq('cookieId', '0');
+
+
+  if (error) {
+    return next({
+      log: 'problem in logoutUser',
+      message: {err: 'cannot logout'}
+    })
+  }
+
+  res.clearCookie('ssid');
+  return next();
+}
 
 export default userController;

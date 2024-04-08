@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import '/src/scss/styles.css';
 import splash from '/src/assets/images/splash-image.jpg';
-import { setIsLoggedIn } from '../slices/flightSlice.js';
 import { Navigate } from 'react-router-dom';
+import { setIsLoggedIn, setFavorite } from '../slices/flightSlice.js';
 
 const Home = () => {
-  const { searchArr, isLoggedIn } = useSelector((state) => state.flight);
+  const { searchArr, isLoggedIn, favorites } = useSelector((state) => state.flight);
 
   const dispatch = useDispatch();
 
@@ -32,6 +32,21 @@ const Home = () => {
     }
 
     isLoggedIn();
+  });
+
+  // if first time rendering, get user's favorite flights
+  useEffect(() => {
+    // using ssid cookie to grab id data for which user to grab favorites
+    async function fetchData() {
+        const response = await fetch(`/api/flights/`, {
+            method: 'GET'
+        });
+        const data = await response.json();
+  
+        dispatch(setFavorite(data));
+    }
+  
+    if (favorites.length === 0) fetchData();
   });
 
   // if user is not logged in, redirect to login

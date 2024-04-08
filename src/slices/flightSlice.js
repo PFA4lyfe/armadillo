@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   username: '',
+  password: '',
   id: 0,
   isLoggedIn: false,
   departureCity: 'LAX',
@@ -15,7 +16,7 @@ const initialState = {
       dest_city: 'JFK',
       ret_date: '2024-05-16',
       price: 1410.52,
-      airlines: 'JetBlue Airways',
+      airline: 'JetBlue Airways',
       num_travelers: 2,
     },
     {
@@ -24,7 +25,7 @@ const initialState = {
       dest_city: 'JFK',
       ret_date: '2024-05-16',
       price: 1410.52,
-      airlines: 'JetBlue Airways',
+      airline: 'JetBlue Airways',
       num_travelers: 2,
     },
     {
@@ -33,7 +34,7 @@ const initialState = {
       dest_city: 'JFK',
       ret_date: '2024-05-16',
       price: 1410.52,
-      airlines: 'JetBlue Airways',
+      airline: 'JetBlue Airways',
       num_travelers: 2,
     },
   ],
@@ -49,6 +50,9 @@ export const flightSlice = createSlice({
     },
     setUsername(state, action) {
       state.username = action.payload;
+    },
+    setPassword(state, action) {
+      state.password = action.payload;
     },
     setId(state, action) {
       state.id = action.payload;
@@ -85,6 +89,7 @@ export const flightSlice = createSlice({
 
 export const {
   setUsername,
+  setPassword,
   setId,
   setIsLoggedIn,
   setDepartureCity,
