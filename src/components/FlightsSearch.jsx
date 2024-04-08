@@ -83,28 +83,6 @@ function arrayofTravelObjects(obj, dep_city, dep_date, dest_city, ret_date, num_
     ZH: 'Shenzhen Airlines',
   };
   const result = [];
-  // obj.data.forEach((flightOffer) => {
-  //   //note: 'flightOffer' is "data" in embeeded response object
-  //   const price = flightOffer.price.total * num_travelers;
-  //   flightOffer.itineraries.forEach((itinerary) => {
-  //     //itinerary is "itineraries"
-  //     itinerary.segments.forEach((segment) => {
-  //       //iterates through "segments" (same name)
-  //       const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
-  //       const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
-  //       const airline = airlinesObj[segment.carrierCode];
-
-  //       if (
-  //         segment.departure.iataCode === dep_city &&
-  //         departureDate === dep_date &&
-  //         segment.arrival.iataCode === dest_city &&
-  //         arrivalDate === ret_date
-  //       ) {
-  //         result.push({ dep_city, dep_date, dest_city, ret_date, price, airline, num_travelers });
-  //       }
-  //     });
-  //   });
-  // });
   obj.data.forEach((flightOffer) => {
     //note: 'flightOffer' is "data" in embeeded response object
     const price = flightOffer.price.total * num_travelers;
@@ -117,12 +95,26 @@ function arrayofTravelObjects(obj, dep_city, dep_date, dest_city, ret_date, num_
     obj.num_travelers = num_travelers;
     flightOffer.itineraries.forEach((itinerary) => {
       //itinerary is "itineraries"
+
       itinerary.segments.forEach((segment) => {
-        //iterates through "segments" (same name)
-        const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
-        const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
+        const departureDate = new Date(segment.departure.at);
+        const arrivalDate = new Date(segment.arrival.at);
+
+        const formatTime = (date) => {
+          let hours = date.getHours();
+          const amPm = hours < 12 ? 'am' : 'pm';
+          hours -= 12;
+          let minutes = date.getMinutes();
+          return hours + ':' + minutes + amPm;
+        };
+
+        const departureTime = formatTime(departureDate);
+        const arrivalTime = formatTime(arrivalDate);
+
         const airline = airlinesObj[segment.carrierCode];
         obj.airline = airline;
+        obj.departureTime = departureTime;
+        obj.arrivalTime = arrivalTime;
       });
     });
     result.push(obj);
@@ -164,7 +156,8 @@ function Flights() {
     const tokenData = await tokenResponse.json();
     // Pull out token from token data obj
     const accessToken = tokenData.access_token;
-
+    localStorage.setItem('access token', accessToken);
+    localStorage.getItem('access token');
     // Second, Fetch queryURL with access token
     const url = queryText;
     const options = {
@@ -180,7 +173,7 @@ function Flights() {
       const data = await response.json();
       console.log('THIS IS THE BIG API OBJ');
       console.log(data);
-      // call function to parse returned data obj
+      // function call to parse returned data obj
       const matchingFlights = arrayofTravelObjects(
         data,
         departureCity,
