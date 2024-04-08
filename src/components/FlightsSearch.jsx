@@ -148,7 +148,7 @@ function Flights() {
     queryText += '&nonStop=true&currencyCode=USD&max=10';
 
     const url = queryText;
-    const accessToken = 'kVDl8Al3o8kyzRryrjVW1jAtsmsi';
+    const accessToken = 'mPtNQN3FoKMcHpJdfqEYONw6ENTM';
     const options = {
       method: 'GET',
       headers: {

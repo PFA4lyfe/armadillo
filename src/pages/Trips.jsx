@@ -46,7 +46,7 @@ const Trips = (props) => {
     }
     
     if (favorites.length === 0) fetchData();
-  });
+  }, []);
 
   // if user is not logged in, redirect to login
   if (!isLoggedIn) {
