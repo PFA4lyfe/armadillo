@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
+  name: '',
   username: '',
   password: '',
   id: 0,
@@ -48,6 +49,9 @@ export const flightSlice = createSlice({
     setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
     },
+    setName(state, action) {
+      state.name = action.payload;
+    },
     setUsername(state, action) {
       state.username = action.payload;
     },
@@ -88,6 +92,7 @@ export const flightSlice = createSlice({
 });
 
 export const {
+  setName,
   setUsername,
   setPassword,
   setId,

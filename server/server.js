@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 //app.use('/src', express.static(path.resolve(__dirname, '../src')));
 
 // signup
-app.post('/signup', userController.createUser, (req, res) => {
+app.post('/api/signup', userController.createUser, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 
