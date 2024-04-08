@@ -50,7 +50,10 @@ app.post('/api/login', userController.verifyUser, cookieController.setSSIDCookie
 
 // verify logged in
 app.get('/api/isLoggedIn/', sessionController.isLoggedIn, (req, res) => {
-  res.status(200).json({success: res.locals.isLoggedIn});
+  res.status(200).json({
+    success: res.locals.isLoggedIn,
+    ...res.locals.user[0],
+  });
 });
 
 // log out

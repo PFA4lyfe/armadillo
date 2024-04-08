@@ -4,6 +4,7 @@ const initialState = {
   username: '',
   password: '',
   id: 0,
+  displayUsername: '',
   isLoggedIn: true,
   departureCity: 'LAX',
   destinationCity: 'JFK',
@@ -61,6 +62,9 @@ export const flightSlice = createSlice({
     setId(state, action) {
       state.id = action.payload;
     },
+    setDisplayUsername(state, action) {
+      state.displayUsername = action.payload;
+    },
     setDepartureCity(state, action) {
       state.departureCity = action.payload;
     },
@@ -96,6 +100,7 @@ export const {
   setUsername,
   setPassword,
   setId,
+  setDisplayUsername,
   setIsLoggedIn,
   setDepartureCity,
   setDestinationCity,

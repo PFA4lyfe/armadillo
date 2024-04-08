@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import '/src/scss/styles.css';
 import splash from '/src/assets/images/splash-image.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoggedIn, setUsername, setId, setPassword } from '../slices/flightSlice';
+import { setIsLoggedIn, setUsername, setId, setPassword, setDisplayUsername } from '../slices/flightSlice';
 
 const Login = () => {
 
@@ -34,6 +34,7 @@ const Login = () => {
     if (data.success) {
         dispatch(setIsLoggedIn(true));
         dispatch(setId(data.id));
+        dispatch(setDisplayUsername(data.username));
     } else {
         dispatch(setIsLoggedIn(false));
         dispatch(setId(0));

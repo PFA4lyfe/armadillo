@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import '/src/scss/styles.css';
 import splash from '/src/assets/images/splash-image.jpg';
 import { Navigate } from 'react-router-dom';
-import { setIsLoggedIn, setFavorite } from '../slices/flightSlice.js';
+import { setIsLoggedIn, setFavorite, setDisplayUsername } from '../slices/flightSlice.js';
 
 const Home = () => {
   const { searchArr, isLoggedIn, favorites } = useSelector((state) => state.flight);
@@ -28,6 +28,7 @@ const Home = () => {
         dispatch(setIsLoggedIn(false));
       } else {
         dispatch(setIsLoggedIn(true));
+        dispatch(setDisplayUsername(data.username));
       }
     }
 
@@ -39,7 +40,6 @@ const Home = () => {
   useEffect(() => {
     // using ssid cookie to grab id data for which user to grab favorites
     async function fetchData() {
-        console.log('grabbing favorite flights')
         const response = await fetch(`/api/flights/`, {
             method: 'GET'
         });
@@ -48,7 +48,10 @@ const Home = () => {
         dispatch(setFavorite(data));
     }
       
-    if (favorites.length === 0) fetchData();
+    if (favorites.length === 0) {
+      console.log('grabbing favorite flights')
+      fetchData()
+    }
   }, []);
 
   // if user is not logged in, redirect to login
