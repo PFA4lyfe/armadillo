@@ -112,6 +112,7 @@ button:hover {
   margin-bottom: 40px;
 }
 .error-img {
+display: flex;
 border-radius: 30px;
 width: 55vw;
 height: 35vw;

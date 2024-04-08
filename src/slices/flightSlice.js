@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
+  name: '',
   username: '',
   password: '',
   id: 0,
-  isLoggedIn: false,
+  isLoggedIn: true,
   departureCity: 'LAX',
   destinationCity: 'JFK',
   departureDate: '2024-05-05',
@@ -48,6 +49,9 @@ export const flightSlice = createSlice({
     setIsLoggedIn(state, action) {
       state.isLoggedIn = action.payload;
     },
+    setName(state, action) {
+      state.name = action.payload;
+    },
     setUsername(state, action) {
       state.username = action.payload;
     },
@@ -82,12 +86,13 @@ export const flightSlice = createSlice({
       state.favorites = action.payload;
     },
     removeFavorite: (state, action) => {
-      state.favorites.filter((favorites) => favorites.id !== action.payload);
+      state.favorites = state.favorites.filter((favorite) => favorite.id !== action.payload);
     },
   },
 });
 
 export const {
+  setName,
   setUsername,
   setPassword,
   setId,

@@ -13,7 +13,7 @@ const Trips = (props) => {
   // check if user session is up
   useEffect(() => {
     console.log('checking session')
-    const isLoggedIn = async () => {
+    const checkSession = async () => {
       const response = await fetch(`/api/isLoggedIn/`, {
         method: 'GET'
       })
@@ -29,13 +29,14 @@ const Trips = (props) => {
       }
     }
 
-    isLoggedIn();
+    checkSession();
   });
 
-  // if first time rendering, get user's favorite flights (done already in home page, but just in case they go straight to this page)
+  // if first time rendering, get user's favorite flights
   useEffect(() => {
     // using ssid cookie to grab id data for which user to grab favorites
     async function fetchData() {
+        console.log('grabbing favorite flights')
         const response = await fetch(`/api/flights/`, {
             method: 'GET'
         });
@@ -45,17 +46,23 @@ const Trips = (props) => {
     }
     
     if (favorites.length === 0) fetchData();
-  });
+  }, []);
 
   // if user is not logged in, redirect to login
   if (!isLoggedIn) {
     return (<Navigate to='/login/' />);
   }
 
+  console.log(favorites);
   return (
     <div>
       <h1>Trips</h1>
-      <FlightList flightArr={favorites} title='Favorites' buttonText='Remove from Favorites' />
+      <FlightList 
+        flightArr={favorites} 
+        title='Favorites' 
+        buttonText='Remove from Favorites'
+        isAdd={false}
+      />
     </div>
   );
 };

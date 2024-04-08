@@ -8,7 +8,10 @@ const sessionController = {};
 sessionController.isLoggedIn = async (req, res, next) => {
 
   // if no ssid, send to login
-  if (!req.cookies.ssid) return next();
+  if (!req.cookies.ssid) {
+    res.locals.isLoggedIn = false;
+    return next();
+  }
 
   // grab cookie ssid
   const id = req.cookies.ssid;
