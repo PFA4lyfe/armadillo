@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import FlightList from '../components/FlightList.jsx';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { setIsLoggedIn, setFavorite, setDisplayUsername } from '../slices/flightSlice.js';
+import { setIsLoggedIn, setFavorite, setDisplayUsername, setId } from '../slices/flightSlice.js';
 
 const Trips = (props) => {
   const { favorites, isLoggedIn} = useSelector((state) => state.flight);
@@ -27,6 +27,7 @@ const Trips = (props) => {
       } else {
         dispatch(setIsLoggedIn(true));
         dispatch(setDisplayUsername(data.username));
+        dispatch(setId(data.cookieId));
       }
     }
 

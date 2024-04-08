@@ -16,14 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// BOTTOM 3 FOR PRODUCTION CODE
-app.get('/assets/index-kqKc0O6G.js', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../dist/assets/index-kqKc0O6G.js'));
-});  
-
-app.get('/assets/index-BkU-0Mpb.css', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../dist/assets/index-BkU-0Mpb.css'));
-});  
+// serve all dist files on production build
+app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets/')));
 
 // serve index.html on home page
 app.get('/', (req, res) => {

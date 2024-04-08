@@ -8,6 +8,9 @@ function FlightList({ flightArr, title, buttonText, isAdd }) {
 
   // if button says add to favorite, then do this
   const handleAddClick = ({dep_city, dest_city, dep_date, ret_date, price, airline, num_travelers, id}) => {
+    let audio = new Audio('/src/assets/sounds/plane_beep.mp3');
+
+    audio.play();
     const data = {
       dep_city,
       dest_city,
@@ -31,7 +34,6 @@ function FlightList({ flightArr, title, buttonText, isAdd }) {
       .then((data) => dispatch(addFavorite(data)))
       .catch((error) => console.error('Error:', error));
 
-    // if button says delete, then do something else
   };
   
   // if button says delete to favorite, then do this

@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import '/src/scss/styles.css';
 import splash from '/src/assets/images/splash-image.jpg';
 import { Navigate } from 'react-router-dom';
-import { setIsLoggedIn, setFavorite, setDisplayUsername } from '../slices/flightSlice.js';
+import { setIsLoggedIn, setFavorite, setDisplayUsername, setId } from '../slices/flightSlice.js';
 
 const Home = () => {
   const { searchArr, isLoggedIn, favorites } = useSelector((state) => state.flight);
@@ -29,6 +29,7 @@ const Home = () => {
       } else {
         dispatch(setIsLoggedIn(true));
         dispatch(setDisplayUsername(data.username));
+        dispatch(setId(data.cookieId));
       }
     }
 
