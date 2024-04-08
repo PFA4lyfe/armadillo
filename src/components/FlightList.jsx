@@ -2,7 +2,7 @@ import Flight from './Flight.jsx';
 import '/src/scss/styles.css';
 
 function FlightList({ flightArr, title, buttonText }) {
-  console.log(flightArr);
+  // console.log(flightArr);
 
   const Flights = flightArr.map((el, idx) => {
     return (
