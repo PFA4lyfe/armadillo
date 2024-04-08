@@ -77,6 +77,13 @@ button {
   color: white;
   border-radius: 2px;
   width: 100px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: margin-right 2s ease-in-out .5s;}
+
+button:hover {
+  width: 110px;
+  background-color: rgb(130, 218, 240);
 }
 
 /* Error page  */
