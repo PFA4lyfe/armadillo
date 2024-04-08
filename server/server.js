@@ -1,18 +1,20 @@
 import express from 'express';
 const app = express();
+import cookieParser from 'cookie-parser';
 import path from 'path';
 const PORT = 3000;
 const __dirname = import.meta.dirname;
 import apiRouter from './routes/api.js';
 import cookieController from './controllers/cookieController.js';
 import userController from './controllers/userController.js';
-// import sessionController from './controllers/sessionController.js';
+import sessionController from './controllers/sessionController.js';
 
 /**
  * handle parsing request body
  */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // BOTTOM 3 FOR PRODUCTION CODE
 app.get('/assets/index-kqKc0O6G.js', (req, res) => {
@@ -39,15 +41,18 @@ app.post('/signup', userController.createUser, (req, res) => {
 /*
 * login
 */
-app.post('/login', userController.verifyUser, cookieController.setSSIDCookie, (req, res) => {
-  // res.status(200).redirect('/secret');
-  res.status(200).json({login: 'success'});
+app.post('/api/login', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
+  res.status(200).json({success: true});
+});
+
+// verify logged in
+app.get('/api/isLoggedIn/', sessionController.isLoggedIn, (req, res) => {
+  res.status(200).json({success: res.locals.isLoggedIn});
 });
 
 
 //define route handlers
 app.use('/api/', apiRouter);
-
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => res.sendStatus(404));

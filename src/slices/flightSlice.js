@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
-  username: 'lord',
-  id: 7,
+  username: '',
+  id: 0,
+  isLoggedIn: false,
   departureCity: 'LAX',
   destinationCity: 'JFK',
   departureDate: '2024-05-05',
@@ -43,6 +44,15 @@ export const flightSlice = createSlice({
   name: 'flight',
   initialState,
   reducers: {
+    setIsLoggedIn(state, action) {
+      state.isLoggedIn = action.payload;
+    },
+    setUsername(state, action) {
+      state.username = action.payload;
+    },
+    setId(state, action) {
+      state.id = action.payload;
+    },
     setDepartureCity(state, action) {
       state.departureCity = action.payload;
     },
@@ -74,6 +84,9 @@ export const flightSlice = createSlice({
 });
 
 export const {
+  setUsername,
+  setId,
+  setIsLoggedIn,
   setDepartureCity,
   setDestinationCity,
   setDepartureDate,

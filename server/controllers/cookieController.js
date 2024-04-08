@@ -23,7 +23,6 @@ cookieController.setSSIDCookie = async (req, res, next) => {
   res.locals.id = await data[0].id.toString();
 
   res.cookie('ssid', res.locals.id, {
-    maxAge: 3600000,
     secure: true,
     httpOnly: true,
   });
