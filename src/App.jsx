@@ -6,21 +6,24 @@ import Signup from './pages/Signup.jsx';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './scss/styles.css'; 
 import logo from './assets/images/logo.png'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUsername, setPassword, setId, setFavorite, setIsLoggedIn } from './slices/flightSlice.js';
 
 function App() {
 
   const dispatch = useDispatch();
+
+  const {favorites} = useSelector(state => state.flight);
   
   const handleLogoutClick = async () => {
+
+    const response = await fetch('/api/logout');
+
+    //dispatch(setIsLoggedIn(false));
     dispatch(setUsername(''));
     dispatch(setPassword(''));
     dispatch(setId(0));
     dispatch(setFavorite([]));
-    dispatch(setIsLoggedIn(false));
-
-    const response = await fetch('/api/logout');
 
     const data = await response.json();
 

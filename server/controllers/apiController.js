@@ -22,6 +22,12 @@ apiController.getUser = async (req, res, next) => {
 }
 
 apiController.getUserFlights = async (req, res, next) => {
+
+    if (!req.cookies.ssid) {
+      res.locals.flights = [];
+      return next();
+    }
+
     const id = req.cookies.ssid;
   
     const { data, error } = await supabase

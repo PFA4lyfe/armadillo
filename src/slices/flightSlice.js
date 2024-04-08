@@ -4,7 +4,7 @@ const initialState = {
   username: '',
   password: '',
   id: 0,
-  isLoggedIn: false,
+  isLoggedIn: true,
   departureCity: 'LAX',
   destinationCity: 'JFK',
   departureDate: '2024-05-05',
