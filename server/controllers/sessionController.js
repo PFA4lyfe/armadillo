@@ -7,11 +7,12 @@ const sessionController = {};
 // */
 sessionController.isLoggedIn = async (req, res, next) => {
 
+  res.locals.isLoggedIn = false;
+  res.locals.user = {};
+
   // if no ssid, send to login
-  if (!req.cookies.ssid) {
-    res.locals.isLoggedIn = false;
-    return next();
-  }
+  if (!req.cookies.ssid) return next();
+
 
   // grab cookie ssid
   const id = req.cookies.ssid;
@@ -29,12 +30,20 @@ sessionController.isLoggedIn = async (req, res, next) => {
         })
     }
 
-    res.locals.isLoggedIn = true;
-
     // if session not found, clear any ssid cookies it gave us and respond with false
     if (data.length === 0) {
         res.clearCookie('ssid');
-        res.locals.isLoggedIn = false;
+    } else {
+      res.locals.isLoggedIn = true;
+      res.locals.user = data;
+
+      // grab username of logged in user to update display username
+      const usernameData = await supabase
+        .from('users')
+        .select()
+        .eq('id', res.locals.user[0].cookieId);
+
+      res.locals.user[0].username = usernameData.data[0].username;
     }
 
     return next();
