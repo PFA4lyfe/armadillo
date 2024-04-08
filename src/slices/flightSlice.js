@@ -15,7 +15,7 @@ const initialState = {
       ret_date: '2024-05-16',
       price: 1410.52,
       airlines: 'JetBlue Airways',
-      num_travelers: 2
+      num_travelers: 2,
     },
     {
       dep_city: 'LAX',
@@ -24,7 +24,7 @@ const initialState = {
       ret_date: '2024-05-16',
       price: 1410.52,
       airlines: 'JetBlue Airways',
-      num_travelers: 2
+      num_travelers: 2,
     },
     {
       dep_city: 'LAX',
@@ -33,8 +33,8 @@ const initialState = {
       ret_date: '2024-05-16',
       price: 1410.52,
       airlines: 'JetBlue Airways',
-      num_travelers: 2
-    }
+      num_travelers: 2,
+    },
   ],
   favorites: [],
 };
@@ -79,6 +79,7 @@ export const {
   setDepartureDate,
   setReturnDate,
   setNumTravelers,
+  setSearchArr,
   addFavorite,
   setFavorite,
   removeFavorite,

@@ -7,97 +7,128 @@ import {
   setNumTravelers,
 } from '../slices/flightSlice';
 import '/src/scss/styles.css';
+import { setSearchArr } from '../slices/flightSlice';
 
 //NOTE: function that retries matching information from fetched data (obj), note: "airlinesObj" is the airlines obj inside function
 function arrayofTravelObjects(obj, dep_city, dep_date, dest_city, ret_date, num_travelers) {
-    const airlinesObj = {
-        "3X": "Japan Air Commuter",
-        "6E": "IndiGo",
-        "6J": "Solaseed Air",
-        "7G": "StarFlyer",
-        "9C": "Spring Airlines",
-        "AA": "American Airlines",
-        "AC": "Air Canada",
-        "AI": "Air India",
-        "AK": "AirAsia",
-        "AM": "Aeromexico",
-        "ANA": "All Nippon Airways",
-        "AR": "Aerolineas Argentinas",
-        "AV": "Avianca",
-        "B6": "JetBlue Airways",
-        "BC": "Skymark Airlines",
-        "BR": "EVA Air",
-        "CA": "Air China",
-        "CI": "China Airlines",
-        "CM": "Copa Airlines",
-        "CZ": "China Southern Airlines",
-        "DL": "Delta Air Lines",
-        "EK": "Emirates",
-        "ET": "Ethiopian Airlines",
-        "EY": "Etihad Airways",
-        "F9": "Frontier Airlines",
-        "FJ": "Fiji Airways",
-        "GA": "Garuda Indonesia",
-        "GK": "Jetstar Japan",
-        "GJ": "Loong Air",
-        "HA": "Hawaiian Airlines",
-        "IT": "Tigerair Taiwan",
-        "JL": "Japan Airlines",
-        "KA": "Cathay Dragon",
-        "KE": "Korean Air",
-        "KL": "KLM Royal Dutch Airlines",
-        "KN": "China United Airlines",
-        "LA": "LATAM Airlines",
-        "LH": "Lufthansa",
-        "MK": "Air Mauritius",
-        "MS": "EgyptAir",
-        "MU": "China Eastern Airlines",
-        "NH": "All Nippon Airways",
-        "NK": "Spirit Airlines",
-        "NU": "Japan Transocean Air",
-        "NZ": "Air New Zealand",
-        "OC": "Oriental Air Bridge",
-        "ON": "Nauru Airlines",
-        "OZ": "Asiana Airlines",
-        "PX": "Air Niugini",
-        "PR": "Philippine Airlines",
-        "QF": "Qantas Airways",
-        "QR": "Qatar Airways",
-        "RK": "Ryukyu Air Commuter",
-        "SB": "Aircalin",
-        "SG": "SpiceJet",
-        "SK": "Scandinavian Airlines System (SAS)",
-        "SQ": "Singapore Airlines",
-        "SV": "Saudia",
-        "TG": "Thai Airways International",
-        "TN": "Air Tahiti Nui",
-        "TR": "Scoot",
-        "TV": "Tibet Airlines",
-        "UU": "Air Austral",
-        "VA": "Virgin Australia",
-        "VN": "Vietnam Airlines",
-        "WS": "WestJet",
-        "ZG": "ZIPAIR Tokyo",
-        "ZH": "Shenzhen Airlines"
-        };
-    const result = [];
-    obj.data.forEach(flightOffer => { //note: 'flightOffer' is "data" in embeeded response object
-      const price = flightOffer.price.total * num_travelers;
-      flightOffer.itineraries.forEach(itinerary => {  //itinerary is "itineraries"
-        itinerary.segments.forEach(segment => { //iterates through "segments" (same name)
-            console.log(obj)
-          const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
-          const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
-          const airline = airlinesObj[segment.carrierCode]
-       
-          if (segment.departure.iataCode === dep_city && departureDate === dep_date && segment.arrival.iataCode === dest_city && arrivalDate === ret_date) {
-            result.push({ dep_city, dep_date, dest_city, ret_date, price, airline, num_travelers });
-          }
-        });
+  const airlinesObj = {
+    '3X': 'Japan Air Commuter',
+    '6E': 'IndiGo',
+    '6J': 'Solaseed Air',
+    '7G': 'StarFlyer',
+    '9C': 'Spring Airlines',
+    AA: 'American Airlines',
+    AC: 'Air Canada',
+    AI: 'Air India',
+    AK: 'AirAsia',
+    AM: 'Aeromexico',
+    ANA: 'All Nippon Airways',
+    AR: 'Aerolineas Argentinas',
+    AS: 'Alaskan Airlines',
+    AV: 'Avianca',
+    B6: 'JetBlue Airways',
+    BC: 'Skymark Airlines',
+    BR: 'EVA Air',
+    CA: 'Air China',
+    CI: 'China Airlines',
+    CM: 'Copa Airlines',
+    CZ: 'China Southern Airlines',
+    DL: 'Delta Air Lines',
+    EK: 'Emirates',
+    ET: 'Ethiopian Airlines',
+    EY: 'Etihad Airways',
+    F9: 'Frontier Airlines',
+    FJ: 'Fiji Airways',
+    GA: 'Garuda Indonesia',
+    GK: 'Jetstar Japan',
+    GJ: 'Loong Air',
+    HA: 'Hawaiian Airlines',
+    IT: 'Tigerair Taiwan',
+    JL: 'Japan Airlines',
+    KA: 'Cathay Dragon',
+    KE: 'Korean Air',
+    KL: 'KLM Royal Dutch Airlines',
+    KN: 'China United Airlines',
+    LA: 'LATAM Airlines',
+    LH: 'Lufthansa',
+    MK: 'Air Mauritius',
+    MS: 'EgyptAir',
+    MU: 'China Eastern Airlines',
+    NH: 'All Nippon Airways',
+    NK: 'Spirit Airlines',
+    NU: 'Japan Transocean Air',
+    NZ: 'Air New Zealand',
+    OC: 'Oriental Air Bridge',
+    ON: 'Nauru Airlines',
+    OZ: 'Asiana Airlines',
+    PX: 'Air Niugini',
+    PR: 'Philippine Airlines',
+    QF: 'Qantas Airways',
+    QR: 'Qatar Airways',
+    RK: 'Ryukyu Air Commuter',
+    SB: 'Aircalin',
+    SG: 'SpiceJet',
+    SK: 'Scandinavian Airlines System (SAS)',
+    SQ: 'Singapore Airlines',
+    SV: 'Saudia',
+    TG: 'Thai Airways International',
+    TN: 'Air Tahiti Nui',
+    TR: 'Scoot',
+    TV: 'Tibet Airlines',
+    UU: 'Air Austral',
+    VA: 'Virgin Australia',
+    VN: 'Vietnam Airlines',
+    WS: 'WestJet',
+    ZG: 'ZIPAIR Tokyo',
+    ZH: 'Shenzhen Airlines',
+  };
+  const result = [];
+  // obj.data.forEach((flightOffer) => {
+  //   //note: 'flightOffer' is "data" in embeeded response object
+  //   const price = flightOffer.price.total * num_travelers;
+  //   flightOffer.itineraries.forEach((itinerary) => {
+  //     //itinerary is "itineraries"
+  //     itinerary.segments.forEach((segment) => {
+  //       //iterates through "segments" (same name)
+  //       const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
+  //       const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
+  //       const airline = airlinesObj[segment.carrierCode];
+
+  //       if (
+  //         segment.departure.iataCode === dep_city &&
+  //         departureDate === dep_date &&
+  //         segment.arrival.iataCode === dest_city &&
+  //         arrivalDate === ret_date
+  //       ) {
+  //         result.push({ dep_city, dep_date, dest_city, ret_date, price, airline, num_travelers });
+  //       }
+  //     });
+  //   });
+  // });
+  obj.data.forEach((flightOffer) => {
+    //note: 'flightOffer' is "data" in embeeded response object
+    const price = flightOffer.price.total * num_travelers;
+    const obj = {};
+    obj.dep_city = dep_city;
+    obj.dest_city = dest_city;
+    obj.dep_date = dep_date;
+    obj.ret_date = ret_date;
+    obj.price = price.toFixed(2);
+    obj.num_travelers = num_travelers;
+    flightOffer.itineraries.forEach((itinerary) => {
+      //itinerary is "itineraries"
+      itinerary.segments.forEach((segment) => {
+        //iterates through "segments" (same name)
+        const departureDate = new Date(segment.departure.at).toISOString().split('T')[0]; //slices time off and leaves just with the date
+        const arrivalDate = new Date(segment.arrival.at).toISOString().split('T')[0];
+        const airline = airlinesObj[segment.carrierCode];
+        obj.airline = airline;
       });
     });
-    return result;
-  }
+    result.push(obj);
+  });
+  return result;
+}
 
 function Flights() {
   const dispatch = useDispatch();
@@ -114,30 +145,37 @@ function Flights() {
     queryText += `&departureDate=${departureDate}`;
     queryText += `&returnDate=${returnDate}`;
     queryText += `&adults=${numTravelers}`;
-    queryText += '&max=5';
+    queryText += '&nonStop=true&max=5';
 
-      const url = queryText;
-      const accessToken = 'XyDluAJkdvUZbpdjUMO2SraMsvVr';
-      const options = {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-        },
-      };
+    const url = queryText;
+    const accessToken = 'nsWgmS1Xsbk31jMCVIYl7r4hlcK7';
+    const options = {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
 
     try {
-        const response = await fetch(url, options);
-        const data = await response.json();
-
-        // HEATHER: CREATE NEW ARRAY HERE TO SEND OUT TO DISPATCH, CHRIS MADE A STATE CALLED search
-        const matchingFlights = arrayofTravelObjects(data, departureCity, departureDate, destinationCity, returnDate, numTravelers);
-        dispatch(matchingFlights); 
-
-       } catch (err) {
-            console.log(`An error occured: ${err}.`)
-       }
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      // HEATHER: CREATE NEW ARRAY HERE TO SEND OUT TO DISPATCH, CHRIS MADE A STATE CALLED search
+      const matchingFlights = arrayofTravelObjects(
+        data,
+        departureCity,
+        departureDate,
+        destinationCity,
+        returnDate,
+        numTravelers
+      );
+      dispatch(setSearchArr(matchingFlights));
+      console.log('matchingFLightsArr:', matchingFlights);
+    } catch (err) {
+      console.log(`An error occurred: ${err}.`);
     }
+  };
 
   return (
     <div className='flights-search-component'>
