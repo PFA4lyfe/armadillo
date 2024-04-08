@@ -16,13 +16,13 @@ function Flight({
   const dispatch = useDispatch();
   const handleClick = () => {
     const data = {
-      departure: dep_city,
-      destination: dest_city,
-      dep_date: dep_date,
-      arr_date: ret_date,
-      price: price,
-      airline: airline,
-      num_travelers: num_travelers,
+      dep_city,
+      dest_city,
+      dep_date,
+      ret_date,
+      price,
+      airline,
+      num_travelers,
       user_id: id,
     };
     console.log(data);

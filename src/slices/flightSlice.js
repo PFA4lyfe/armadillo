@@ -10,52 +10,33 @@ const initialState = {
   searchArr: [
     {
       dep_city: 'LAX',
+      dep_date: '2024-05-15',
       dest_city: 'JFK',
-      dep_date: '2024-05-04',
-      ret_date: '2024-05-08',
-      price: 1200,
-      airline: 'Jet Blue',
-      num_travelers: 2,
+      ret_date: '2024-05-16',
+      price: 1410.52,
+      airlines: 'JetBlue Airways',
+      num_travelers: 2
     },
     {
       dep_city: 'LAX',
+      dep_date: '2024-05-15',
       dest_city: 'JFK',
-      dep_date: '2024-05-04',
-      ret_date: '2024-05-08',
-      price: 1200,
-      airline: 'Jet Blue',
-      num_travelers: 2,
+      ret_date: '2024-05-16',
+      price: 1410.52,
+      airlines: 'JetBlue Airways',
+      num_travelers: 2
     },
     {
       dep_city: 'LAX',
+      dep_date: '2024-05-15',
       dest_city: 'JFK',
-      dep_date: '2024-05-04',
-      ret_date: '2024-05-08',
-      price: 1200,
-      airline: 'Jet Blue',
-      num_travelers: 2,
-    },
+      ret_date: '2024-05-16',
+      price: 1410.52,
+      airlines: 'JetBlue Airways',
+      num_travelers: 2
+    }
   ],
-  favorites: [
-    {
-      dep_city: 'LAX',
-      dest_city: 'JFK',
-      dep_date: '2024-05-04',
-      ret_date: '2024-05-08',
-      price: 1200,
-      airline: 'Jet Blue',
-      num_travelers: 2,
-    },
-    {
-      dep_city: 'LAX',
-      dest_city: 'JFK',
-      dep_date: '2024-05-04',
-      ret_date: '2024-05-08',
-      price: 1200,
-      airline: 'Jet Blue',
-      num_travelers: 2,
-    },
-  ],
+  favorites: [],
 };
 
 export const flightSlice = createSlice({
@@ -83,6 +64,9 @@ export const flightSlice = createSlice({
     addFavorite: (state, action) => {
       state.favorites.push(action.payload);
     },
+    setFavorite: (state, action) => {
+      state.favorites = action.payload;
+    },
     removeFavorite: (state, action) => {
       state.favorites.filter((favorites) => favorites.id !== action.payload);
     },
@@ -96,6 +80,7 @@ export const {
   setReturnDate,
   setNumTravelers,
   addFavorite,
+  setFavorite,
   removeFavorite,
 } = flightSlice.actions;
 
