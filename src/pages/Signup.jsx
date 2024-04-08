@@ -1,4 +1,3 @@
-// import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '/src/scss/styles.css';
 import splash from '/src/assets/images/splash-image.jpg';
@@ -26,12 +25,9 @@ const Signup = () => {
         })
         const data = await response.json();
         console.log(data);
-        // alert('Signup successful');
         if (response.ok) {
-            // If the signup is successful, navigate to the login page
             navigate('/login');
         } else {
-            // Handle signup failure (e.g., show an error message)
             alert('Signup failed. Please try again.');
         }
     }

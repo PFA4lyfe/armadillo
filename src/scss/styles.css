@@ -8,26 +8,30 @@
   text-decoration: none;
 }
 
-/* header */
 header {
   display: flex;
   align-items: center;
   font-size: 15px;
   justify-content: space-between;
-  color: var(--secondary-text);
 }
 
 .leftNav li a {
   color: var(--secondary-text);
 }
 
-.rightNav {
+.rightNav li {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
+.rightNav li a {
+  color: var(--secondary-text);
+
+}
 .rightSection {
   display: flex;
+
 }
 header img {
   height: 4em;
@@ -40,7 +44,6 @@ header ul {
   margin: 0;
   padding: 0;
 }
-/* Flights component */
 .flights-search-component {
   display: flex;
   justify-content: center;
