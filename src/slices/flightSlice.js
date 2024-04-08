@@ -82,7 +82,7 @@ export const flightSlice = createSlice({
       state.favorites = action.payload;
     },
     removeFavorite: (state, action) => {
-      state.favorites.filter((favorites) => favorites.id !== action.payload);
+      state.favorites = state.favorites.filter((favorite) => favorite.id !== action.payload);
     },
   },
 });

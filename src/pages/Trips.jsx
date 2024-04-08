@@ -27,6 +27,11 @@ const Trips = (props) => {
       } else {
         dispatch(setIsLoggedIn(true));
       }
+
+      // if user is not logged in, redirect to login
+      if (!isLoggedIn) {
+        return (<Navigate to='/login/' />);
+      }
     }
 
     isLoggedIn();
@@ -47,15 +52,17 @@ const Trips = (props) => {
     if (favorites.length === 0) fetchData();
   });
 
-  // if user is not logged in, redirect to login
-  if (!isLoggedIn) {
-    return (<Navigate to='/login/' />);
-  }
 
+  console.log(favorites);
   return (
     <div>
       <h1>Trips</h1>
-      <FlightList flightArr={favorites} title='Favorites' buttonText='Remove from Favorites' />
+      <FlightList 
+        flightArr={favorites} 
+        title='Favorites' 
+        buttonText='Remove from Favorites'
+        isAdd={false}
+      />
     </div>
   );
 };

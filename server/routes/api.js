@@ -31,9 +31,9 @@ router.get('/flights/', apiController.getUserFlights, (req, res) => {
   res.status(200).json(res.locals.flights);
 });
 
-// router.delete('/flights/:id', apiController.deleteUserFlight, (req, res) => {
-//   res.status(200).json({a: 1});
-// });
+router.delete('/flights/:id', apiController.deleteUserFlight, (req, res) => {
+  res.status(200).json({a: 1});
+});
 
 router.post('/flights/', apiController.addUserFlight, (req, res) => {
   res.status(200).json(res.locals.flight);

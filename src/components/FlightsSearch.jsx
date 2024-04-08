@@ -145,7 +145,7 @@ function Flights() {
     queryText += `&departureDate=${departureDate}`;
     queryText += `&returnDate=${returnDate}`;
     queryText += `&adults=${numTravelers}`;
-    queryText += '&nonStop=true&max=10';
+    queryText += '&nonStop=true&currencyCode=USD&max=10';
 
     const url = queryText;
     const accessToken = 'kVDl8Al3o8kyzRryrjVW1jAtsmsi';

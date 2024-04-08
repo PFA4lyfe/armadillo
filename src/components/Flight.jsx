@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { removeFavorite, addFavorite } from '../slices/flightSlice';
+import { useSelector } from 'react-redux';
 
 function Flight({
+  flight_id,
   dep_city,
   dest_city,
   dep_date,
@@ -9,36 +9,10 @@ function Flight({
   price,
   airline,
   num_travelers,
-  isFav,
   buttonText,
+  handleClick,
 }) {
   const { id } = useSelector((state) => state.flight);
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    const data = {
-      dep_city,
-      dest_city,
-      dep_date,
-      ret_date,
-      price,
-      airline,
-      num_travelers,
-      user_id: id,
-    };
-
-    const url = '/api/flights';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => dispatch(addFavorite(data)))
-      .catch((error) => console.error('Error:', error));
-  };
 
   return (
     <div>
@@ -49,7 +23,7 @@ function Flight({
       <p>Price: ${price}</p>
       <p>Airline: {airline}</p>
       <p>Number of Travelers: {num_travelers}</p>
-      <button onClick={handleClick}>{buttonText}</button>
+      <button onClick={() => handleClick({flight_id, dep_city, dest_city, dep_date, ret_date, price, airline, num_travelers, id})}>{buttonText}</button>
     </div>
   );
 }

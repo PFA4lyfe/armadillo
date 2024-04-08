@@ -29,6 +29,11 @@ const Home = () => {
       } else {
         dispatch(setIsLoggedIn(true));
       }
+
+      // if user is not logged in, redirect to login
+      if (!isLoggedIn) {
+        return (<Navigate to='/login/' />);
+      }
     }
 
     isLoggedIn();
@@ -49,11 +54,6 @@ const Home = () => {
     if (favorites.length === 0) fetchData();
   });
 
-  // if user is not logged in, redirect to login
-  if (!isLoggedIn) {
-    return (<Navigate to='/login/' />);
-  }
-
   return (
     <div>
       <img className='splash' src={splash} />
@@ -62,6 +62,7 @@ const Home = () => {
         flightArr={searchArr}
         title='Flight Search Results'
         buttonText='Add to Favorites'
+        isAdd={true}
       />
     </div>
   );
