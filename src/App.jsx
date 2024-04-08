@@ -1,5 +1,6 @@
 import Home from './pages/Home.jsx';
 import Trips from './pages/Trips.jsx'
+import ErrorPage from './pages/Error404.jsx'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './scss/styles.css'; 
 import logo from './assets/images/logo.png'
@@ -29,7 +30,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/home' element={<Home />}/>
           <Route path='/trips' element={<Trips />}/>
-          <Route path='*' element={<Home />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>

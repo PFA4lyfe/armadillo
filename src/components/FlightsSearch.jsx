@@ -148,7 +148,7 @@ function Flights() {
     queryText += '&nonStop=true&max=5';
 
     const url = queryText;
-    const accessToken = 'nsWgmS1Xsbk31jMCVIYl7r4hlcK7';
+    const accessToken = 'JpJJfXvbD0EtAegtL3A3EaR4SDLw';
     const options = {
       method: 'GET',
       headers: {
@@ -160,6 +160,7 @@ function Flights() {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
+      console.log("THIS IS THE BIG API OBJ")
       console.log(data);
       // HEATHER: CREATE NEW ARRAY HERE TO SEND OUT TO DISPATCH, CHRIS MADE A STATE CALLED search
       const matchingFlights = arrayofTravelObjects(

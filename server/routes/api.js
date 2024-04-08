@@ -27,6 +27,8 @@ const router = Router();
 //  });
 
 router.get('/flights/:id', apiController.getUserFlights, (req, res) => {
+  console.log("THIS IS THE RESPONSE FLIGHTS")
+  console.log(res);
   res.status(200).json(res.locals.flights);
 });
 
