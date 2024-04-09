@@ -46,6 +46,7 @@ function FlightList({ flightArr, title, buttonText, isAdd }) {
       .catch((error) => console.error('Error:', error));
   };
 
+  // returns add or delete flight, depending on use case
   const handleClick = (arg) => {
     if (isAdd) return handleAddClick(arg);
       else return handleDeleteClick(arg);

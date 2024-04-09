@@ -108,6 +108,7 @@ function arrayofTravelObjects(obj, dep_city, dep_date, dest_city, ret_date, num_
           return hours + ':' + minutes + amPm;
         };
 
+        // times currently not implemented in renders, but available in the object
         const departureTime = formatTime(departureDate);
         const arrivalTime = formatTime(arrivalDate);
 
@@ -143,7 +144,8 @@ function Flights() {
     const clientId = 'UIkOGQNaUAgqBLR3tWzUwONjPHtKM2Aj';
     const clientSecret = 'bLDXr7EhhtLbR0P9';
 
-    // First, fetch the access token
+    // First, fetch the access token (does this every time we search)
+    // TODO: access token lasts 30 min, find a way to not get a new token if unneeded
     const tokenResponse = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
       method: 'POST',
       headers: {
@@ -235,25 +237,3 @@ function Flights() {
 }
 
 export default Flights;
-
-// we get that large data obj, and there's 5 results
-
-// SO the goal is to make an array of 5 elements
-
-// each element is an object with 5ish pproperty (what we actually need)
-
-// for each element in our large array...
-// apiObject.forEach(el => {
-// result.push({
-//     dep: el.something.something.flights.dep
-//     arr:
-//     time:
-//     price:
-//     airline:
-// })
-// })
-
-// once we have result that is a smaller version of our returned object
-// send that to our slice to update our search state
-
-//dep_city, dest_city, dep_date, ret_date, price, airline, num_travelers

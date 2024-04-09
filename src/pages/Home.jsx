@@ -24,6 +24,7 @@ const Home = () => {
 
       console.log(data);
 
+      // if session found, set loggedIn to true and set display username / id
       if (!data.success) {
         dispatch(setIsLoggedIn(false));
       } else {
@@ -49,6 +50,7 @@ const Home = () => {
         dispatch(setFavorite(data));
     }
       
+    // ONLY run fetch if data length is 0 (not fetched yet)
     if (favorites.length === 0) {
       console.log('grabbing favorite flights')
       fetchData()

@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
+  // states for tracking user info
   name: '',
   username: '',
   password: '',
   id: 0,
   displayUsername: '',
   isLoggedIn: true,
+
+  // states to track searches
   departureCity: 'LAX',
   destinationCity: 'JFK',
   departureDate: '2024-05-05',
@@ -40,6 +43,8 @@ const initialState = {
       num_travelers: 2,
     },
   ],
+
+  // state for favorite flights
   favorites: [],
 };
 

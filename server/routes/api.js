@@ -1,8 +1,6 @@
 import { Router } from 'express';
 import apiController from '../controllers/apiController.js';
 const router = Router();
-
-// router.get('/test', async (req, res) => {
 //   const url =
 //    'https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=LAX&destinationLocationCode=JFK&departureDate=2024-05-15&returnDate=2024-05-25&adults=2&max=5';
 //   const accessToken = 'llQ0jqeZzqOr7c1kpNLBX9DzPWM8';

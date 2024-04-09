@@ -16,16 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// serve all dist files on production build
+// serve all static dist files on production build
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets/')));
 
 // serve index.html on home page
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
 });  
-
-// handle requests for static files
-//app.use('/src', express.static(path.resolve(__dirname, '../src')));
 
 // signup
 app.post('/api/signup', userController.createUser, (req, res) => {

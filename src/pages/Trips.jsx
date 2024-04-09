@@ -22,6 +22,7 @@ const Trips = (props) => {
 
       console.log(data);
 
+      // if session found, set display username and id, and loggedIn to true
       if (!data.success) {
         dispatch(setIsLoggedIn(false));
       } else {

@@ -7,7 +7,6 @@ import { setIsLoggedIn, setUsername, setId, setPassword, setDisplayUsername } fr
 
 const Login = () => {
 
-  // if login is successful, change this state to true
   const dispatch = useDispatch();
 
   const {isLoggedIn, username, password} = useSelector(state => state.flight);

@@ -24,7 +24,8 @@ const Signup = () => {
             })
         })
         const data = await response.json();
-        console.log(data);
+        
+        // if signup successful, go to login
         if (response.ok) {
             navigate('/login');
         } else {
