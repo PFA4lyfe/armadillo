@@ -55,8 +55,11 @@ app.get('/api/logout', userController.logoutUser, (req, res) => {
 //define route handlers
 app.use('/api/', apiRouter);
 
-// catch-all route handler for any requests to an unknown route
-app.use('*', (req, res) => res.sendStatus(404));
+
+// supply index.html for all other requests, which can route to specific pages or 404 page
+app.get('*', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
+});  
 
 app.use((err, req, res, next) => {
   const defaultErr = {

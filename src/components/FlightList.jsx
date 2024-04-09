@@ -2,13 +2,14 @@ import Flight from './Flight.jsx';
 import '/src/scss/styles.css';
 import { addFavorite, removeFavorite } from '../slices/flightSlice.js';
 import { useDispatch } from 'react-redux';
+import planeAudio from '../assets/sounds/plane_beep.mp3';
 
 function FlightList({ flightArr, title, buttonText, isAdd }) {
   const dispatch = useDispatch();
 
   // if button says add to favorite, then do this
   const handleAddClick = ({dep_city, dest_city, dep_date, ret_date, price, airline, num_travelers, id}) => {
-    let audio = new Audio('/src/assets/sounds/plane_beep.mp3');
+    let audio = new Audio(planeAudio);
 
     audio.play();
     const data = {
