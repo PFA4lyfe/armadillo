@@ -158,8 +158,7 @@ function Flights() {
     const tokenData = await tokenResponse.json();
     // Pull out token from token data obj
     const accessToken = tokenData.access_token;
-    localStorage.setItem('access token', accessToken);
-    localStorage.getItem('access token');
+
     // Second, Fetch queryURL with access token
     const url = queryText;
     const options = {
