@@ -1,0 +1,129 @@
+:root {
+  --primary-text: rgb(25, 25, 25);
+  --secondary-text: rgb(46, 46, 46);
+  --button-color: rgb(81, 123, 133);
+}
+* {
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  justify-content: space-between;
+}
+
+.leftNav li a {
+  color: var(--secondary-text);
+}
+
+.rightNav li {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rightNav li a {
+  color: var(--secondary-text);
+
+}
+.rightSection {
+  display: flex;
+
+}
+header img {
+  height: 4em;
+  width: auto;
+}
+header ul {
+  list-style-type: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+.flights-search-component {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.flight-list-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flight-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.flight-list > * {
+  border: 1px solid black;
+  padding: 10px;
+}
+.flight-list button {
+  margin-left: 45px;
+}
+
+/* Image */
+.splash {
+  width: 100%;
+  height: auto;
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-color);
+  border: none;
+  color: white;
+  border-radius: 2px;
+  width: 100px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: margin-right 2s ease-in-out .5s;}
+
+button:hover {
+  width: 110px;
+  background-color: rgb(130, 218, 240);
+}
+
+/* Error page  */
+
+.body {
+  background-color: rgb(255, 252, 252);
+  margin: 0;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#error-message {
+  font-size: 3em;
+  text-align: center;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  margin-bottom: 20px;
+}
+.error-details {
+  font-size: 1.4em;
+  text-align: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #666;
+  margin-bottom: 40px;
+}
+.error-img {
+display: flex;
+border-radius: 30px;
+width: 55vw;
+height: 35vw;
+}
+
+.aboutUs {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  list-style-type: none;
+};
